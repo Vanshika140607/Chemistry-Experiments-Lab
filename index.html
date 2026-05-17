@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Chemistry Project</title>
+</head>
+
+<body>
+    <nav class="navbar background">
+        <ul class="nav-list">
+            <div class="logo"><img src="logo.jpeg" alt="logo"></div>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+        <div class="rightNav">
+        </div>
+    </nav>
+
+    <section class="background firstsection" id="home">
+        <div class="box-main">
+            <div class="firstHalf">
+                <p class="text-big">Explore Laboratory Experiments</p>
+                <p class="text-small">This website helps you learn chemistry
+                    experiments in a simple and practical way. It provides
+                    step-by-step instructions, required materials, and safety
+                    guidelines so that even beginners can perform experiments
+                    with confidence and understand the concepts behind them.
+                    <br><br>
+                    Our platform focuses on making chemistry interactive and
+                    easy to grasp by connecting theory with real experiments.
+                    With clear explanations and visual support, it encourages
+                    curiosity and builds strong practical knowledge for students
+                    at all levels.
+                </p>
+                <div class="button">
+                    <a href="experiments.html" class="btn">Get Started</a>
+                </div>
+            </div>
+            <div class="secondHalf">
+                <img src="background.jpg" alt="laptop image">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="box-main">
+            <div class="about-content">
+                <h1 class="text-center">About Us</h1>
+                <p class="text-small" style="text-align: center; max-width: 800px; margin: auto;">
+                    We are passionate about making chemistry accessible and engaging for everyone. 
+                    Our virtual laboratory provides a safe and interactive environment to learn, 
+                    experiment, and understand complex chemical concepts. We believe that practical 
+                    knowledge combined with theoretical understanding is the key to mastering chemistry.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h1 class="text-center">Our Services</h1>
+        <div class="services-container">
+            <div class="service-box">
+                <h2>Virtual Experiments</h2>
+                <p>Interactive simulations of real-world chemistry experiments.</p>
+            </div>
+            <div class="service-box">
+                <h2>Step-by-Step Guides</h2>
+                <p>Detailed instructions and theoretical background for every lab.</p>
+            </div>
+            <div class="service-box">
+                <h2>Safety Training</h2>
+                <p>Comprehensive guidelines to ensure safe laboratory practices.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h1 class="text-center">Contact Us</h1>
+        <div class="form">
+            <input class="form-input" type="text" name="name" id="name" placeholder="Enter your name">
+            <input class="form-input" type="text" name="phone" id="phone" placeholder="Enter your contact no">
+            <input class="form-input" type="email" name="email" id="email" placeholder="Enter your email">
+            <textarea class="form-input" name="text" id="text" cols="30" rows="10"
+                placeholder="Ellaborate your concern"></textarea>
+            <button class="btn btn-dark" id="submitBtn">Submit</button>
+            <p id="successMessage" style="display: none; color: #00ff88; text-align: center; margin-top: 15px; font-weight: bold; text-shadow: 0 0 5px rgba(0,255,136,0.5);">Message sent successfully!</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="text-footer">
+            copyright &copy; 2026 www.Chemistry laboratory.com All rights reserved
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default form submission behavior if it was in a form tag
+
+            // Get values from inputs
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const concern = document.getElementById('text').value.trim();
+
+            // Validate inputs
+            if(name === '' || email === '' || concern === '') {
+                alert('Please fill in the required fields: Name, Email, and Concern.');
+                return;
+            }
+
+            // Create an object for the new contact message
+            const newMessage = {
+                name: name,
+                phone: phone,
+                email: email,
+                concern: concern,
+                date: new Date().toLocaleString()
+            };
+
+            // Retrieve existing messages from local storage or initialize an empty array
+            let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+            
+            // Add new message to the array
+            messages.push(newMessage);
+            
+            // Save the updated array back to local storage
+            localStorage.setItem('contactMessages', JSON.stringify(messages));
+
+            // Clear the form fields
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('text').value = '';
+
+            // Show success message briefly
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+            
+            console.log("Contact information stored successfully in localStorage:", newMessage);
+        });
+    </script>
+</body>
+
+</html>
